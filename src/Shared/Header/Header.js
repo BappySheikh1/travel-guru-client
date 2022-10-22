@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Header.css'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -6,8 +6,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../../assets/logo.png'
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import {  FaUser } from 'react-icons/fa';
+import Image from 'react-bootstrap/Image'
 
 const Header = () => {
+  const{user}=useContext(AuthContext);
+
     return (
         <div>
              <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -33,12 +38,25 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <>
+            <Nav>
+              { user?.uid ?
+              <button>Sign Out</button>
+              :
+              <>
               <Link to='/login'>LogIn</Link>
               <Link to='/register'>Register</Link>
-            </>
+
+              </>
+              }
+            </Nav>
+            
             <Nav.Link eventKey={2} href="#memes">
-              Dank memes
+              {
+                user?.uid ?
+                <Image  roundedCircle src={user?.photoURL}></Image>
+                :
+                <FaUser />
+              }
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
