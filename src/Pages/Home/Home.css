@@ -1,0 +1,10 @@
+body{
+    
+}
+.home-container{
+    
+    background-image: url('../../assets/images/Rectangle\ 1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 800px;
+}
